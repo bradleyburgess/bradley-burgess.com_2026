@@ -8,9 +8,9 @@ isFeatured: false
 image:
   src: "@/assets/img/ob-cover.png"
   alt: >-
-  Cover of the Orgelbüchlein recording, featuring a photo of the Fritts organ 
-  at St. Thomas Episcopal Church, Terrace Park, Ohio
-category: musi
+    Cover of the Orgelbüchlein recording, featuring a photo of the Fritts organ 
+    at St. Thomas Episcopal Church, Terrace Park, Ohio
+category: music
 tags:
   - bach
   - orgelbuchlein
