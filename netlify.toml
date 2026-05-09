@@ -21,7 +21,7 @@
       style-src 'self' 'unsafe-inline';
       img-src 'self' data: blob: https://img.youtube.com https://i.ytimg.com https://images.unsplash.com;
       media-src 'self' blob: https://dl.dropboxusercontent.com;
-      frame-src https://www.youtube.com https://www.youtube-nocookie.com;
+      frame-src https://www.google.com https://www.youtube.com https://www.youtube-nocookie.com;
       connect-src 'self' https://lichess.org https://api.telegram.org;
       font-src 'self';
       object-src 'none';
