@@ -1,0 +1,152 @@
+title: About
+description: >-
+  I am a Cape Town-based musician turned software developer. I have two
+  decades of performing experience on both the piano and organ. I love the
+  web, and have turned a hobby of building for the web into a second career. I
+  love Bach, Beethove, Liszt, and open source software.
+featuredImage:
+  src: '@/assets/img/bradley-piano.jpg'
+  alt: >-
+    Bradley, wearing a black shirt and jacket, playing a grand piano, eyes
+    closed, lost in the music.
+content: |
+  # My story
+
+  I have always loved music and I have always loved computers — and I can trace
+  both passions back to early 
+  [“core memories”](https://insideout.fandom.com/wiki/Core_Memories).
+
+  ## Computers are cool
+
+  I fell in love with computers at the age of eight or so when a school friend’s
+  mom taught me how to use DOS and helped me write my first program in QBasic.
+  In hindsight, it was a really trivial program (a terminal-based directory /
+  phonebook app), but that amazing feeling of putting words and symbols in a
+  text editor that caused a computer to ask you questions and then save the
+  responses to disk? The feeling never went away. The feeling of bringing
+  something to life just using a keyboard never left me. Since then I have
+  always tinkered with computers — building PCs from components, building a home
+  server, getting fed up with Windows _and_ Mac and switching to Linux
+  full-time, etc.
+
+  ## Music is magic
+
+  I fell in love with music a little earlier than that. I don’t know how old I
+  was exactly, but I would “help” my sister (ten years older than me) practice.
+  This I would do by standing at the lower end of the piano, and playing certain
+  bass notes when she told me to. I know now that I was almost certainly more a
+  nuisance than anything, but those memories started a love affair with the
+  piano and, later, the pipe organ. At one point in high school I really wanted
+  to be a film composer, but my real joy was the piano.
+
+  ## Learning the organ because I'm lazy
+
+  I came to the organ much later — right at the end of high school. There is a 
+  small Anglican church just outside the campus of our high school. There 
+  organist fell suddenly ill, and they were desperate for someone to fill in
+  while he recovered — or until they found a permanent replacement. I had never
+  touched an organ before that, but I told them I could play the electronic
+  keyboard that lived at the back of the church. It was extremely heavy, though,
+  and we (the rector and I) had to cart it from the back of the church every
+  week.  I eventually decided it would be easier to learn to play the organ, and
+  so I gave myself one month to figure it out. I was only supposed to be there
+  for a couple months, but I ended up staying there for more than three years. 
+
+  ## Two careers, always a keyboard (or three)
+
+  With two passions centered around keyboards, it was eventually time to choose
+  a career path. Ultimately, music won, and I went on to study music at
+  universities and conservatories and subsequently have a professional career as
+  a pianist, organist, conductor, and educaftor. I have loved every minute of
+  it.
+
+  After twenty years of professional music-making, I decided it was time for a
+  change. For almost my entire working career my family and I had lived in the 
+  United States. We moved back to South Africa in early 2025, and I took that
+  opportunity to make the change. I now work full-time as a software engineer,
+  and am loving that, too. It is a bit strange not making music quite a smuch as
+  I used to. But the upside is that it's now entirely on my terms
+
+faq:
+  title: Things I'm often asked
+  subtitle: … just in case you were curious.
+  sections:
+    - section: Tech
+      items:
+        - title: What programming languages do you know / use?
+          description: >-
+            I started my development life with Javascript, and in many ways it's
+            still my "home" language. I eventually added Typescript, and it's
+            hard to imagine doing new projects without it. I've also done a fair
+            bit of Node and Python (mostly scripting and Django). At work we
+            currently mostly use .NET and Flutter, which I'm also quite comfortable
+            with.
+        - title: What do you think about AI?
+          description: >-
+            I kinda hate it, to be honest. I'm not against the _idea_ of A(G)I,
+            but I have a number of very serious reservations about how it's been
+            developed and deployed in society. It has incredible potential to 
+            completely redefine the world, but I believe that a lot of the
+            players behind it have been wreckless and have not kept the main
+            thing the main thing — the betterment of society for _everyone_. So,
+            while it is pretty remarkable, I have some major concerns about it.
+        - title: What's so great about open source software?
+          description: >-
+            Don't even get me started. It is incredible and super important for
+            a number of reasons. I am a big believer in digital sovereignty, and
+            open source software is a key part of that. It allows users to have
+            control over their own digital lives, rather than being at the mercy
+            of large corporations.  It also fosters innovation and
+            collaboration, as developers from all over the world can
+            contribute  to and improve upon existing projects. Plus, it's also
+            really cool to be able to see how things work under the hood; it's
+            great for learning. But for me it's mostly about freedom — “free” as
+            in beer and speech.
+        - title: What are some of your favorite open source projects?
+          description: >-
+            There are so many great ones, but at the top of the list must be
+            Linux. I use Linux on my daily driver (personal) laptop. I currently
+            use Debian, but Pop!_OS is also incredible. All of the developer
+            tooling I use is open source — VS Code, Git, etc. A lot of people
+            don't realize that the internet is kinda run on open source
+            software.
+    - section: Music
+      items:
+        - title: What music do you like / listen to?
+          description: >-
+            I am a classical musician, so naturally I love classical music. But
+            I am pretty electic both within classical music and in other genres.
+            I love jazz, and in particular love the jazz piano greats like Oscar
+            Peterson, Art Tatum, and Keith Jarrett. I listen to a really wide
+            variety of music, though, not least of all because I am in a house
+            and family of musicians who all have different tastes.
+        - title: Who are your favorite composers?
+          description: >-
+            I'm quite eclectic, but I do have favorites, depending on the genre.
+            As a pianist, it's Liszt, Beethoven, and Brahms. Liszt for unique
+            combination of virtuosity, religiosity, drama, and the “profane”;
+            Beethoven for the mastery of form and rule breaking; and Brahms for
+            the the breadth of intimacy to vibrant, youthful energy. As an
+            organist, it's pretty much Bach, who is surely the greatest in the
+            pantheon of greats, as well as the more colorful French masters,
+            like Widor and Langlais.
+        - title: Do you prefer the piano or the organ?
+          description: >-
+            They are completely different instruments, and I will not choose!
+            They don't really “compete” with each other, because they are —
+            again — so very different. They are both very expressive
+            instruments, but the kinds of things they express are quite
+            different. The piano has a much more immediate, direct expression.
+            The way you touch the keys has a direct impact on the sound, and you
+            can control every single note's shading and voicing. The organ deals
+            more with the “big pictre” — it's huge and complex. Of course the
+            organ can be intimate as well, but for me it's more about the
+            contrasts and colors and orchestral sonorities than it is about the
+            immediate, very human expression.
+chess:
+  title: Chess
+  description: >-
+    After a many-year hiatus, I have come back to chess. (This was mostly
+    prompted by my son getting into it.) I am on [lichess.org](https://lichess.org),
+    and play almost every day now. I choose Lichess over [chess.com](https://chess.com)
+    because — you guessed it — Lichess is completely free and open source.

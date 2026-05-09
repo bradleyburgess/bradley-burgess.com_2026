@@ -1,0 +1,50 @@
+---
+import { Image } from "astro:assets";
+import {
+  Tile,
+  TileContent,
+  TileDescription,
+  TileMedia,
+  TileTitle,
+} from "@/components/ui/tile";
+import { marked } from "marked";
+import { formatDate } from "@/lib/utils";
+
+interface Props {
+  posts: {
+    href: string;
+    title: string;
+    description: string;
+    publishDate: string;
+    image: {
+      src: ImageMetadata;
+      alt: string;
+      width?: number;
+      height?: number;
+    };
+  }[];
+}
+
+const { posts } = Astro.props;
+---
+
+<div class="w-full flex flex-col gap-4 lg:gap-6">
+  <!-- <SectionGrid size="sm"> -->
+  <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-start">
+    {
+      posts?.map(({ title, description, image, href, publishDate }) => (
+        <Tile href={href} class="m-2 lg:m-4 md:max-w-56 flex-1">
+          <TileMedia class="aspect-video w-full">
+            <Image fit="cover" layout="full-width" {...image} />
+          </TileMedia>
+          <TileContent>
+            <TileTitle class="leading-tight">{title}</TileTitle>
+            <TileDescription>{formatDate(publishDate)}</TileDescription>
+            <TileDescription set:html={marked(description!)} />
+          </TileContent>
+        </Tile>
+      ))
+    }
+  </div>
+  <!-- </SectionGrid> -->
+</div>

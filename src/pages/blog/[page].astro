@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+import BlogListLayout from "@/layouts/BlogListLayout.astro";
+import type { GetStaticPaths } from "astro";
+import { getAllTags } from "@/lib/utils";
+
+const blogPage = (await getCollection("blogPage"))[0]?.data;
+if (!blogPage) throw new Error("Blog page config not found");
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const allPosts = await getCollection("blog").then((posts) =>
+    posts.sort((a, b) => {
+      const dateA = new Date(a.data.publishDate);
+      const dateB = new Date(b.data.publishDate);
+      return dateB.getTime() - dateA.getTime();
+    }),
+  );
+  return paginate(allPosts, { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+const allTags = await getCollection("blog").then((posts) =>
+  getAllTags(posts.map((p) => p.data)),
+);
+
+const { page } = Astro.props;
+
+const allCategories = await getCollection("blogCategories").then((categories) =>
+  categories.map((cat) => cat.data),
+);
+---
+
+<BlogListLayout
+  title="All Blog Posts"
+  description={blogPage.description ?? "My blog posts"}
+  page={page}
+  categories={allCategories}
+  tags={allTags}
+/>

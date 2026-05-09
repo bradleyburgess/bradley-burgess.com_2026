@@ -1,0 +1,73 @@
+---
+import { getCollection, type InferEntrySchema } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+  Section,
+  SectionContent,
+  SectionProse,
+  SectionSplit,
+} from "@/components/ui/section";
+import Heading from "@/components/Heading.astro";
+import TagsList from "@/components/blog/TagsList.astro";
+import { marked } from "marked";
+import CategoriesList from "@/components/blog/CategoriesList.astro";
+import BlogPosts from "@/components/blog/BlogPosts.astro";
+import type { Page } from "astro";
+import Pagination from "@/components/blog/Pagination.astro";
+
+const blogPage = (await getCollection("blogPage"))[0];
+
+interface Props {
+  categories: { id: string; icon: string }[];
+  page: Page<{ id: string; data: InferEntrySchema<"blog"> }>;
+  tags: string[];
+  activeTag?: string;
+  activeCategory?: string;
+  title: string;
+  description: string;
+}
+
+const {
+  categories,
+  page,
+  tags,
+  title,
+  description,
+  activeTag,
+  activeCategory,
+} = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={blogPage.data.ogImage}
+>
+  <Section size="lg" style={{ "--container": "100rem" }}>
+    <SectionSplit class="@5xl:grid-cols-[2fr_5fr]">
+      <div>
+        <SectionContent sticky>
+          <Heading level={1}>{title}</Heading>
+          <SectionProse set:html={marked.parse(description)} />
+          <CategoriesList
+            categories={categories}
+            activeCategory={activeCategory}
+          />
+          <TagsList tags={tags} activeTag={activeTag} />
+        </SectionContent>
+      </div>
+      <SectionContent>
+        <BlogPosts
+          posts={page.data.map(({ data, id }) => ({
+            href: `/blog/p/${id}`,
+            title: data.title,
+            description: data.description,
+            publishDate: data.publishDate,
+            image: data.image,
+          }))}
+        />
+        <Pagination page={page} />
+      </SectionContent>
+    </SectionSplit>
+  </Section>
+</BaseLayout>

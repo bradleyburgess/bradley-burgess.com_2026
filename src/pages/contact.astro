@@ -1,0 +1,298 @@
+---
+import Heading from "@/components/Heading.astro";
+import {
+  Section,
+  SectionContent,
+  SectionGrid,
+  SectionMedia,
+  SectionProse,
+  SectionSplit,
+} from "@/components/ui/section";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import { Item, ItemMedia, ItemTitle } from "@/components/ui/item";
+import { Icon } from "astro-icon/components";
+import { Icon as FulldevIcon } from "@/components/ui/icon";
+import { Input } from "@/components/ui/input";
+import {
+  Field,
+  FieldDescription,
+  FieldLabel,
+  FieldLegend,
+  FieldSet,
+} from "@/components/ui/field";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import FieldError from "@/components/FieldError.astro";
+import { Spinner } from "@/components/ui/spinner";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+
+const config = (await getCollection("config"))[0]?.data;
+if (!config) throw new Error("Site configuration not found.");
+
+const page = (await getCollection("contactPage"))[0]?.data;
+if (!page) throw new Error("Contact page not found!");
+
+const socials = config.socialLinks?.filter((link) =>
+  page.socials.map((s) => s.toLowerCase()).includes(link.label.toLowerCase()),
+);
+---
+
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  ogImage={page.ogImage}
+>
+  <Section>
+    <SectionSplit>
+      <SectionMedia>
+        <Image
+          data-usal="zoomin-r blur duration-850 once"
+          src={page.image.src}
+          alt={page.image.alt}
+          width={1200}
+          loading="eager"
+        />
+      </SectionMedia>
+      <SectionContent>
+        <Heading level={1}>{page.title}</Heading>
+        <SectionProse set:html={page.content} />
+        <SectionGrid size="xs">
+          {
+            socials?.map((s) => (
+              <Item href={s.to} variant="outline">
+                <ItemMedia>
+                  <Icon name={s.icon} />
+                </ItemMedia>
+                <ItemTitle>{s.label}</ItemTitle>
+              </Item>
+            ))
+          }
+        </SectionGrid>
+        <div class="grid grid-cols-1 place-items-center">
+          <form
+            action=""
+            method="POST"
+            novalidate
+            class="w-full flex flex-col gap-6 mt-4 col-start-1 row-start-1"
+          >
+            <input
+              type="text"
+              class="hidden"
+              aria-label="Leave this blank"
+              id="_gotcha"
+              value=""
+            />
+            <Field>
+              <FieldLabel for="name" class="gap-1"
+                >Name<span class="text-destructive">*</span></FieldLabel
+              >
+              <Input
+                id="name"
+                name="name"
+                placeholder="J. S. Bach"
+                required
+                type="text"
+                minlength="2"
+              />
+              <FieldError id="name-error" />
+            </Field>
+
+            <Field>
+              <FieldLabel for="email" class="gap-1"
+                >Email<span class="text-destructive">*</span></FieldLabel
+              >
+              <Input
+                id="email"
+                name="email"
+                placeholder="jsbach@thomaskirche.org"
+                required
+                type="email"
+                pattern={"[a-zA-Z0-9\\._\\%\\+\\-]+@[a-zA-Z0-9\\.\\-]+\\.[a-zA-Z]{2,}"}
+              />
+              <FieldError id="email-error" />
+            </Field>
+
+            <Field>
+              <FieldLabel for="message" class="gap-1"
+                >Message<span class="text-destructive">*</span></FieldLabel
+              >
+              <Textarea
+                id="message"
+                name="message"
+                placeholder="Why do you play my fugues so badly?"
+                required
+                minlength="20"
+                class="resize-none h-[8.575rem]"
+              />
+              <FieldError id="message-error" />
+            </Field>
+
+            <FieldSet>
+              <FieldLegend class="text-sm! flex gap-1"
+                >Anti-spam Question<span class="text-destructive">*</span
+                ></FieldLegend
+              >
+              <FieldDescription>
+                Pandas and piano keys have something in common. They're both
+                (colors):
+              </FieldDescription>
+              <div class="flex gap-6">
+                <Field>
+                  <Input
+                    id="color-1"
+                    type="text"
+                    name="color-1"
+                    class="flex-1"
+                    required
+                  />
+                  <FieldError id="color-1-error" />
+                </Field>
+                <span class="text-sm">and</span>
+                <Field>
+                  <Input
+                    id="color-2"
+                    type="text"
+                    name="color-2"
+                    class="flex-1"
+                    required
+                  />
+                  <FieldError id="color-2-error" />
+                </Field>
+              </div>
+            </FieldSet>
+
+            <Button type="submit"
+              ><Icon name="lucide:send-horizontal" />Send</Button
+            >
+          </form>
+
+          <Spinner
+            id="spinner"
+            class="hidden mt-24 size-48 col-start-1 row-start-1"
+          />
+
+          <Alert
+            class="hidden col-start-1 row-start-1 mt-24 w-auto"
+            id="alert"
+            variant="success"
+          >
+            <FulldevIcon name="check-circle-2" />
+            <AlertTitle id="alert-title">Success!</AlertTitle>
+            <AlertDescription id="alert-description">
+              Your message has been sent. I'll be in touch soon.
+            </AlertDescription>
+          </Alert>
+        </div>
+      </SectionContent>
+    </SectionSplit>
+  </Section>
+
+  <script>
+    import { actions } from "astro:actions";
+
+    (function () {
+      function validateInput(input: HTMLInputElement | HTMLTextAreaElement) {
+        if (!input.validity.valid) {
+          input.ariaInvalid = "true";
+        }
+        if (input.validity.valueMissing) {
+          document.getElementById(`${input.name}-error`)!.textContent =
+            "Required";
+        } else if (
+          input.type === "email" &&
+          (input.validity.typeMismatch || input.validity.patternMismatch)
+        ) {
+          document.getElementById(`${input.name}-error`)!.textContent =
+            "Please enter a valid email address";
+        } else if (input.validity.tooShort) {
+          document.getElementById(`${input.name}-error`)!.textContent =
+            `Must be at least ${input.minLength} characters.`;
+        } else {
+          document.getElementById(`${input.name}-error`)!.textContent = "";
+        }
+      }
+
+      const form = document.querySelector("form") as HTMLFormElement;
+      const nameInput = document.getElementById("name") as HTMLInputElement;
+      const emailInput = document.getElementById("email") as HTMLInputElement;
+      const messageInput = document.getElementById(
+        "message",
+      ) as HTMLTextAreaElement;
+      const color1Input = document.getElementById(
+        "color-1",
+      ) as HTMLInputElement;
+      const color2Input = document.getElementById(
+        "color-2",
+      ) as HTMLInputElement;
+      const gotchaInput = document.getElementById(
+        "_gotcha",
+      ) as HTMLInputElement;
+      const spinner = document.getElementById("spinner") as HTMLDivElement;
+      const alert = document.getElementById("alert") as HTMLDivElement;
+
+      for (const input of [
+        nameInput,
+        emailInput,
+        messageInput,
+        color1Input,
+        color2Input,
+      ]) {
+        input.addEventListener("input", () => {
+          input.ariaInvalid = "false";
+          document.getElementById(`${input.name}-error`)!.textContent = "";
+        });
+        input.addEventListener("blur", () => {
+          validateInput(input);
+        });
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let hasError = false;
+
+        for (const input of [
+          nameInput,
+          emailInput,
+          messageInput,
+          color1Input,
+          color2Input,
+        ]) {
+          if (!input.checkValidity()) {
+            validateInput(input);
+            hasError = true;
+          }
+        }
+        if (hasError) return;
+
+        form.classList.add("hidden");
+        spinner.classList.remove("hidden");
+
+        await actions.contactForm({
+          name: nameInput.value,
+          email: emailInput.value,
+          message: messageInput.value,
+          color1: color1Input.value,
+          color2: color2Input.value,
+          _gotcha: gotchaInput.value,
+        });
+
+        spinner.classList.add("hidden");
+        alert.classList.remove("hidden");
+        alert.classList.add("grid");
+      });
+    })();
+  </script>
+</BaseLayout>
+
+<script>
+  (function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const message = urlParams.get("message");
+    if (message) {
+      (document.getElementById("message") as HTMLTextAreaElement).value =
+        message;
+    }
+  })();
+</script>

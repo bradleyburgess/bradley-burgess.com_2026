@@ -1,0 +1,32 @@
+---
+import Heading from "../Heading.astro";
+
+interface Props {
+  tags: string[];
+  activeTag?: string;
+}
+
+const { tags, activeTag } = Astro.props as Props;
+---
+
+<>
+  <Heading level={2}>Tags</Heading>
+  <ul class="flex flex-wrap gap-4">
+    {
+      tags.map((tag) => (
+        <li>
+          {activeTag === tag ? (
+            <span class="text-sm text-muted-foreground">#{tag}</span>
+          ) : (
+            <a
+              href={`/blog/t/${tag}/1`}
+              class="text-sm text-primary hover:underline"
+            >
+              #{tag}
+            </a>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</>

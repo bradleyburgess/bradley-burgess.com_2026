@@ -1,0 +1,49 @@
+---
+import { marked } from "marked";
+import { Image } from "astro:assets";
+import SocialLinks from "../SocialLinks.astro";
+
+interface Props {
+  hero: {
+    title: string;
+    description: string;
+    image: {
+      src: ImageMetadata;
+      alt: string;
+      width?: number;
+      height?: number;
+    };
+    cta?: {
+      label: string;
+      to: string;
+      icon?: string;
+    }[];
+  };
+}
+
+const { title, image, description } = Astro.props.hero;
+---
+
+<div
+  class="flex flex-col gap-8 items-center"
+  data-usal="fade-d blur split-item duation-600 once"
+>
+  <div class="w-full max-w-48 lg:max-w-xs">
+    <Image
+      layout="constrained"
+      src={image.src}
+      alt={image.alt}
+      class="object-cover aspect-square rounded-full"
+      width={1200}
+      height={1200}
+    />
+  </div>
+  <h1 class="text-3xl lg:text-4xl text-center font-bold">
+    {title}
+  </h1>
+  <div
+    set:html={marked.parse(description)}
+    class="max-w-2xl px-2 lg:px-0 text-md lg:text-lg text-center text-muted-foreground"
+  />
+  <SocialLinks animate />
+</div>

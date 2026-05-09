@@ -1,0 +1,22 @@
+title: Projects
+description: Explore my personal projects
+content: |+
+  On this page you can find some of my personal projects. (Not all of them are
+  actively maintained.)
+
+  **I am available for freelance work, whether that's overhauling an existing
+  project, or building a new site for you or your business.** Please get in touch
+  if you have any questions!
+
+  At [Code Collective](https://codecollective.com), I have experience with a
+  fairly wide range of technologies, but we are mostly a .NET and Flutter shop.
+  I cover the complete stack, from database to frontend and DevOps. Projects I've 
+  worked on at CC include:
+
+  - **VehicleConnect**: An app that integrates with TSAM's (Toyota South Africa Motors)
+    SAP system for logistics companies that move vehicles around the country
+  - **RedSun**: An ERP-like system for one of the largest raisin distributors in South Africa
+links:
+  - to: "/contact?message=Hey!%20I'm%20interested%20in%20hiring%20you"
+    label: Get in touch
+    icon: "lucide:mail"

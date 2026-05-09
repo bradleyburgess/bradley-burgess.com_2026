@@ -1,0 +1,138 @@
+---
+import slugify from "slugify";
+import { Image } from "astro:assets";
+import Heading from "@/components/Heading.astro";
+import {
+  Section,
+  SectionContent,
+  SectionMedia,
+  SectionProse,
+  SectionSplit,
+} from "@/components/ui/section";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import LichessStats from "@/components/LichessStats.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { marked } from "marked";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Button from "@/components/ui/button/button.astro";
+import { Icon } from "astro-icon/components";
+
+const page = (await getCollection("aboutPage"))[0]?.data;
+if (!page) throw new Error("About page content not found");
+
+const config = (await getCollection("config"))[0]?.data;
+if (!config) throw new Error("Config not found");
+const lichess = config.socialLinks?.find((link) =>
+  link.label.toLocaleLowerCase().includes("lichess"),
+);
+if (!lichess) throw new Error("Lichess social not found");
+---
+
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  ogImage={page.ogImage}
+>
+  <Section>
+    <SectionSplit>
+      <SectionContent>
+        <SectionProse set:html={marked(page.content)} size="sm" />
+      </SectionContent>
+      <SectionMedia>
+        <Image
+          data-usal="zoomin-l blur duration-850"
+          loading="eager"
+          src={page.featuredImage.src}
+          alt={page.featuredImage.alt}
+          width={1200}
+          class=""
+        />
+      </SectionMedia>
+    </SectionSplit>
+  </Section>
+
+  <Section>
+    <SectionSplit>
+      <SectionContent>
+        <Card className="bg-inherit">
+          <CardHeader>
+            <CardTitle>
+              <Heading level={2}>{page.faq.title}</Heading>
+            </CardTitle>
+            <CardDescription>{page.faq.subtitle}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Tabs defaultValue={slugify(page.faq.sections[0].section)}>
+              <TabsList class="w-full">
+                {
+                  page.faq.sections.map((f) => (
+                    <TabsTrigger value={slugify(f.section)}>
+                      {f.section}
+                    </TabsTrigger>
+                  ))
+                }
+              </TabsList>
+              {
+                page.faq.sections.map((f) => (
+                  <TabsContent value={slugify(f.section)}>
+                    <Accordion>
+                      {f.items.map((item) => (
+                        <AccordionItem>
+                          <AccordionTrigger class="cursor-pointer">
+                            {item.title}
+                          </AccordionTrigger>
+                          <AccordionContent
+                            set:html={marked(item.description)}
+                          />
+                        </AccordionItem>
+                      ))}
+                    </Accordion>
+                  </TabsContent>
+                ))
+              }
+            </Tabs>
+          </CardContent>
+        </Card>
+        <SectionContent />
+      </SectionContent>
+
+      <SectionContent>
+        <Card className="bg-inherit">
+          <CardHeader>
+            <CardTitle>
+              <Heading level={2}>
+                {page.chess.title}
+              </Heading>
+            </CardTitle>
+            <CardDescription
+              set:html={marked(page.chess.description)}
+              class="text-muted-foreground [&_a]:underline"
+            />
+          </CardHeader>
+          <CardContent>
+            <LichessStats />
+          </CardContent>
+          <CardFooter>
+            <Button as="a" href={lichess.to}>
+              <Icon name="lucide:chess-knight" />Play me on Lichess
+            </Button>
+          </CardFooter>
+        </Card>
+      </SectionContent>
+    </SectionSplit>
+  </Section>
+</BaseLayout>

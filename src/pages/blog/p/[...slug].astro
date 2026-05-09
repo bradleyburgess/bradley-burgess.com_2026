@@ -1,0 +1,116 @@
+---
+import bradleyAvatar from "@/assets/img/bradley-avatar.png";
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+  Section,
+  SectionContent,
+  SectionMedia,
+  SectionProse,
+} from "@/components/ui/section";
+import { marked } from "marked";
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { formatDate } from "@/lib/utils";
+import { Image } from "astro:assets";
+import { render } from "astro:content";
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("blog");
+  return allPosts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { title, description, publishDate, image, tags, category } = post.data;
+const { Content } = await render(post);
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={image}
+  type="article"
+  publishedTime={formatDate(publishDate)}
+  tags={tags}
+>
+  <Section style={{ "--container": "672px" }}>
+    <SectionContent>
+      <SectionProse>
+        <h1>{title}</h1>
+        <div set:html={marked.parse(description)} />
+      </SectionProse>
+      <Item class="p-0">
+        <ItemMedia>
+          <Avatar class="size-10">
+            <AvatarImage
+              src={bradleyAvatar}
+              alt="Headshot of Bradley Burgess"
+            />
+          </Avatar>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Bradley Burgess</ItemTitle>
+          <ItemDescription>{formatDate(publishDate)}</ItemDescription>
+        </ItemContent>
+      </Item>
+      <Item>
+        <ItemContent>
+          <ItemDescription>
+            <div class="grid lg:grid-cols-2 gap-4">
+              <h2 class="text-sm text-muted-foreground uppercase font-semibold">
+                Category: {
+                  category ? (
+                    <a
+                      href={`/blog/c/${category}`}
+                      class="text-primary hover:underline"
+                    >
+                      {category}
+                    </a>
+                  ) : (
+                    <span>Uncategorized</span>
+                  )
+                }
+              </h2>
+              <div class="flex gap-1 flex-wrap">
+                <h2 class="text-sm text-muted-foreground uppercase">Tags:</h2>
+                {
+                  tags ? (
+                    <ul class="flex flex-wrap gap-2">
+                      {tags.map((tag) => (
+                        <li>
+                          <a
+                            href={`/blog/t/${tag}/1`}
+                            class="text-primary hover:underline"
+                          >
+                            #{tag}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <span>No tags</span>
+                  )
+                }
+              </div>
+            </div>
+          </ItemDescription>
+        </ItemContent>
+      </Item>
+    </SectionContent>
+    <SectionMedia>
+      <Image {...image} />
+    </SectionMedia>
+    <SectionProse>
+      <Content />
+    </SectionProse>
+  </Section>
+</BaseLayout>

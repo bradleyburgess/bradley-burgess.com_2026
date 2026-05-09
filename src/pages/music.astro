@@ -1,0 +1,108 @@
+---
+import { Image } from "astro:assets";
+import Heading from "@/components/Heading.astro";
+import MediaPlayer from "@/components/MediaPlayer.vue";
+import { Button } from "@/components/ui/button";
+import {
+  Section,
+  SectionActions,
+  SectionContent,
+  SectionMedia,
+  SectionProse,
+  SectionSplit,
+} from "@/components/ui/section";
+import { Spinner } from "@/components/ui/spinner";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { sortByComposerThenTitle } from "@/lib/utils";
+import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
+import { marked } from "marked";
+
+const videoTracks = await getCollection("videoTracks");
+const audioTracks = await getCollection("audioTracks");
+const page = (await getCollection("musicPage"))[0]?.data;
+if (!page) throw new Error("Music page not found.");
+
+const bioContent = marked.parse(
+  "## " + page.bio.title + "\n\n" + page.bio.content,
+);
+
+const albumContent = marked.parse(
+  "## " + page.album.title + "\n\n" + page.album.content,
+);
+---
+
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  ogImage={page.ogImage}
+>
+  <Section>
+    <div class="flex justify-center">
+      <Heading level={1}>{page.title}</Heading>
+    </div>
+  </Section>
+
+  <Section id="bio">
+    <SectionSplit>
+      <SectionMedia>
+        <Image {...page.bio.image!} loading="eager" />
+      </SectionMedia>
+      <SectionContent>
+        <SectionProse
+          set:html={bioContent}
+          data-usal="fade-l zoomin-l duration-600 delay-150 split-item once"
+        />
+      </SectionContent>
+    </SectionSplit>
+  </Section>
+
+  <Section id="album">
+    <SectionSplit class="items-center">
+      <SectionContent>
+        <SectionProse set:html={albumContent} />
+        {
+          page.album.links && (
+            <SectionActions>
+              {page.album.links?.map((link) => (
+                <Button
+                  as="a"
+                  href={link.to}
+                  variant={link.variant ?? "secondary"}
+                >
+                  <>
+                    <Icon name={link.icon} />
+                    <span>{link.label}</span>
+                  </>
+                </Button>
+              ))}
+            </SectionActions>
+          )
+        }
+      </SectionContent>
+      <SectionMedia>
+        <Image {...page.album.image!} />
+      </SectionMedia>
+    </SectionSplit>
+  </Section>
+
+  <Section style={{ "--container": "120rem" }} id="tracks">
+    <MediaPlayer
+      playlist={[
+        ...videoTracks.map((t) => t.data),
+        ...audioTracks.map((t) => t.data),
+      ]
+        .map((i, ix) => ({ ...i, id: ix }))
+        .sort(sortByComposerThenTitle)}
+      client:only="vue"
+    >
+      <div
+        slot="fallback"
+        class="w-full flex flex-col gap-4 items-center justify-center"
+      >
+        <Spinner class="size-16" />
+        <span class="text-xl">Loading Media Player…</span>
+      </div>
+    </MediaPlayer>
+  </Section>
+</BaseLayout>

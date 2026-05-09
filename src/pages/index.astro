@@ -1,26 +1,37 @@
 ---
-import '../styles/global.css';
-// Component Imports
-import Button from '../components/Button.astro';
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import HomeHero from "@/components/home/HomeHero.astro";
+import ImageCarousel from "@/components/home/ImageCarousel.astro";
+import Highlights from "@/components/home/Highlights.astro";
+import Section from "@/components/ui/section/section.astro";
+import BlogPosts from "@/components/home/BlogPosts.astro";
 
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
+const page = (await getCollection("indexPage"))[0]?.data;
+if (!page) throw new Error("Index page content not found");
+
+const blogs = (await getCollection("blog"))
+  .map((post) => ({
+    href: `/blog/p/${post.id}`,
+    title: post.data.title,
+    description: post.data.description,
+    image: post.data.image,
+    date: post.data.publishDate,
+    category: post.data.category,
+  }))
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .slice(0, 4);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro + TailwindCSS</title>
-	</head>
-
-	<body>
-		<div class="grid place-items-center h-screen content-center">
-			<Button>Tailwind Button in Astro!</Button>
-			<a href="/markdown-page" class="p-4 underline">Markdown is also supported...</a>
-		</div>
-	</body>
-</html>
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  ogImage={page.ogImage}
+>
+  <div class="mt-4 space-y-12">
+    <Section><HomeHero hero={page.hero} /></Section>
+    <Section><ImageCarousel images={page.carouselImages} /></Section>
+    <Section><Highlights highlights={page.highlights} /></Section>
+    <Section><BlogPosts posts={blogs} /></Section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,75 @@
+description: >-
+  I'm a Cape Town-based musician turned software developer. I have two decades of
+  performing experience on both the piano and organ. I love the web, and have
+  turned a hobby of building for the web into a second career. I love Bach,
+  Beethove, Liszt, and open source software.
+hero:
+  title: Hi, I'm Bradley Burgess
+  description: >-
+    I am a Cape Town-based musician turned software developer. I have two
+    decades of performing experience on both the piano and organ. I love the
+    web, and have turned a hobby of building for the web into a second career. I
+    love Bach, Beethove, Liszt, and open source software.
+  image:
+    src: '@/assets/img/bradley-headshot-6x5.jpg'
+    alt: >-
+      Bradley, wearing a black shirt and jacket, smiling at the camera, with
+      trees in the background
+about:
+  title: About Me
+  description: >-
+    I am a software developer with a passion for music and open source. I have
+    been performing on the piano and organ for over two decades, and have
+    recently transitioned into software development. I enjoy building for the
+    web and am always looking for new projects to work on.
+carouselImages:
+  - src: '@/assets/img/bradley-organ-smiling.jpg'
+    alt: Bradley, seated at a large organ, smiling at the camera
+  - src: '@/assets/img/bradley-piano.jpg'
+    alt: >-
+      Shot of Bradley, deep in thought at the piano, taken from the rear of the
+      piano, with the strings exposed
+  - src: '@/assets/img/bradley-thinking.jpg'
+    alt: Trying to debug some code
+  - src: '@/assets/img/bradley-outside.jpg'
+    alt: Outside with sunglasses on
+  - src: '@/assets/img/bradley-bw.jpg'
+    alt: Black and white photo of Bradley seated, with a big smile
+highlights:
+  - title: I'm a musician
+    description: |
+      I have two decades of professional concertizing, church music, and
+      teaching experience. I have undergrad and graduate degrees in both piano
+      and the pipe organ.
+    icon: lucide:music
+    links:
+      - to: /music
+        label: Listen & watch
+        icon: lucide:circle-play
+      - to: /music#bio
+        label: Read Bio
+        icon: lucide:file-text
+  - title: I'm a software developer
+    description: |
+      I have always had a passion for tinkering with tech, and I've turned that passion
+      into a second career. I love building for the web, and am currently a Full-stack
+      Software Engineer at [Code Collective](https://codecollective.com).
+    icon: lucide:code
+    links:
+      - to: /projects
+        label: Projects
+        icon: lucide:folder-open
+      - to: /blog
+        label: Blog
+        icon: lucide:book-open
+  - title: I love chess
+    description: |
+      I was reasonably serious about chess when I was younger and played for
+      school's chess team.  After a many-year hiatus, I'm getting back into it
+      and playing almost everyday.
+    icon: lucide:chess-knight
+    links:
+      - to: https://lichess.org/@/bombarde32
+        label: Play me on Lichess
+        icon: lucide:swords
+    

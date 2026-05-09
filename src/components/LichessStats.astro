@@ -1,0 +1,47 @@
+---
+import { Spinner } from "@/components/ui/spinner";
+import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
+
+const socials = (await getCollection("config"))[0]?.data.socialLinks;
+if (!socials) throw new Error("Social links not found in config collection");
+const lichess = socials.find((s) =>
+  s.label.toLocaleLowerCase().includes("lichess"),
+);
+if (!lichess) throw new Error("Lichess link not found in social links");
+const userName = lichess.to.split("/").pop();
+const url = `https://lichess.org/api/user/${userName}`;
+---
+
+<div class="flex flex-wrap gap-x-18 gap-y-8 mt-8 items-center">
+  <div>
+    <Icon name="simple-icons:lichess" size="80" />
+  </div>
+
+  <div id="lichess_stats">
+    <h3 class="font-bold text-lg">Lichess.org Stats</h3>
+    <div class="grid grid-cols-[auto_1fr] gap-x-4 text-lg mt-2">
+      <span>Rapid Rating:</span>
+      <span id="lichess_rating" class="font-mono"><Spinner /></span>
+      <span>No. of Games:</span>
+      <span id="lichess_nogames" class="font-mono"><Spinner /></span>
+      <span>Last Played:</span>
+      <span id="lichess_seenAt" class="font-mono"><Spinner /></span>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ url }} is:inline>
+  window.addEventListener("load", async function () {
+    const result = await fetch(url);
+    const data = await result.json();
+    const rapidRating = data.perfs.rapid.rating;
+    const rapidGames = data.perfs.rapid.games;
+    const seenAt = new Date(data.seenAt);
+    const relativeSeen = dayjs(seenAt).fromNow();
+
+    document.getElementById("lichess_rating").textContent = rapidRating;
+    document.getElementById("lichess_nogames").textContent = rapidGames;
+    document.getElementById("lichess_seenAt").textContent = relativeSeen;
+  });
+</script>

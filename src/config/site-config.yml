@@ -1,0 +1,56 @@
+title: Bradley Burgess | developer & musician
+shortTitle: Bradley Burgess
+description: >-
+  Hi, I'm Bradley Burgess, a Cape Town-based musician turned software developer.
+  I have two decades of performing experience on both the piano and organ. I
+  love the web, and have turned a hobby of building for the web into a second
+  career. I love Bach, Beethoven, Liszt, and open source software.
+defaultOgImage:
+  src: '@/assets/img/default-og.png'
+  alt: ''
+img:
+  src: '@/assets/img/bradley-headshot-6x5.jpg'
+  alt: >- 
+    Bradley, wearing a black shirt and jacket, smiling at the camera,
+    with trees in the background
+navLinks:
+  - to: /
+    label: Home
+    icon: "lucide:house"
+  - to: /about
+    label: About
+    icon: "lucide:file-text"
+  - to: /music
+    label: Music
+    icon: "lucide:music"
+  - to: /projects
+    label: Projects
+    icon: "lucide:code"
+  - to: /blog/1
+    label: Blog
+    icon: "lucide:book"
+  - to: /contact
+    label: Contact
+    icon: "lucide:mail"
+socialLinks:
+  - label: Bluesky
+    to: https://bsky.app/profile/bburgesskeys.bsky.social
+    icon: "simple-icons:bluesky"
+  - label: GitHub
+    to: https://github.com/bradleyburgess
+    icon: "simple-icons:github"
+  - label: Spotify
+    to: https://open.spotify.com/album/6mS3gueOkxGS8f6vsd3cOW
+    icon: "simple-icons:spotify"
+  - label: YouTube
+    to: https://www.youtube.com/@bburgess_keys
+    icon: "simple-icons:youtube"
+  - label: TikTok
+    to: https://www.tiktok.com/@bburgess_keys
+    icon: "simple-icons:tiktok"
+  - label: LinkedIn
+    to: https://www.linkedin.com/in/bburgesskeys/
+    icon: "simple-icons:linkedin"
+  - label: Lichess
+    to: https://lichess.org/@/bombarde32
+    icon: "simple-icons:lichess"

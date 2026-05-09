@@ -1,0 +1,52 @@
+---
+import BlogListLayout from "@/layouts/BlogListLayout.astro";
+import { getAllTags } from "@/lib/utils";
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const allPosts = await getCollection("blog").then((posts) =>
+    posts.sort((a, b) => {
+      const dateA = new Date(a.data.publishDate);
+      const dateB = new Date(b.data.publishDate);
+      return dateB.getTime() - dateA.getTime();
+    }),
+  );
+  const allTags = getAllTags(allPosts.map((p) => p.data));
+
+  const paths = allTags.flatMap((tag) =>
+    paginate(
+      allPosts.filter((post) => post.data.tags?.includes(tag)),
+      {
+        params: { tag },
+        pageSize: 10,
+      },
+    ),
+  );
+  return paths;
+}) satisfies GetStaticPaths;
+
+const blogPage = (await getCollection("blogPage"))[0]?.data;
+if (!blogPage) throw new Error("Blog page config not found");
+
+const allTags = await getCollection("blog").then((posts) =>
+  getAllTags(posts.map((p) => p.data)),
+);
+
+const allCategories = (await getCollection("blogCategories")).map(
+  (cat) => cat.data,
+);
+if (!allCategories) throw new Error("Blog categories not found");
+
+const { page } = Astro.props;
+const { tag } = Astro.params;
+---
+
+<BlogListLayout
+  title={`#${tag} posts`}
+  description={blogPage.description ?? `All posts tagged with #${tag}`}
+  page={page}
+  categories={allCategories}
+  tags={allTags}
+  activeTag={tag}
+/>

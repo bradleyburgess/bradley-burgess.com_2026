@@ -1,0 +1,8 @@
+- id: dev
+  icon: 'lucide:code'
+- id: music
+  icon: 'lucide:music'
+- id: chess
+  icon: 'lucide:chess-knight'
+- id: misc
+  icon: 'lucide:circle-question-mark'

@@ -1,0 +1,132 @@
+---
+import { Image } from "astro:assets";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import bradleyAvatar from "@/assets/img/bradley-avatar.png";
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item";
+import {
+  Section,
+  SectionContent,
+  SectionMedia,
+  SectionProse,
+} from "@/components/ui/section";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { render } from "astro:content";
+import { getCollection } from "astro:content";
+import { formatDate } from "@/lib/utils";
+import { Icon } from "astro-icon/components";
+import { marked } from "marked";
+
+export async function getStaticPaths() {
+  const allProjects = await getCollection("projects");
+  return allProjects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+
+const {
+  title,
+  description,
+  image,
+  publishDate,
+  technologies: _technologies,
+  links,
+} = project.data;
+
+const allTechnologies = await getCollection("technologies");
+
+const technologies = _technologies.map(
+  (techId) => allTechnologies.find((t) => t.id === techId)!.data,
+);
+
+const { Content } = await render(project);
+---
+
+<BaseLayout title={title} description={description} ogImage={image}>
+  <Section style={{ "--container": "672px" }}>
+    <SectionContent>
+      <SectionProse>
+        <h1>Project: {title}</h1>
+        <div set:html={marked.parse(description)} />
+      </SectionProse>
+      <Item class="p-0">
+        <ItemMedia>
+          <Avatar class="size-10">
+            <AvatarImage
+              src={bradleyAvatar}
+              alt="Headshot of Bradley Burgess"
+            />
+          </Avatar>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Bradley Burgess</ItemTitle>
+          <ItemDescription>{formatDate(publishDate)}</ItemDescription>
+        </ItemContent>
+      </Item>
+    </SectionContent>
+    <SectionMedia>
+      <Image {...image} />
+    </SectionMedia>
+    <div class="grid md:grid-cols-2 md:gap-6 **:text-muted-foreground!">
+      <SectionProse>
+        <h2 class="font-semibold text-lg!">Technologies:</h2>
+        <ul class="list-none! [&_li]:mb-1">
+          {
+            technologies.map((tech) => (
+              <li class="flex items-center gap-2">
+                <Icon name={tech.icon} />
+                <span>{tech.name}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </SectionProse>
+      <SectionProse>
+        <h2 class="font-semibold text-lg!">Project Links:</h2>
+        <ul class="list-none! [&_li]:mb-1">
+          {
+            links.github && (
+              <li>
+                <a
+                  href={links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-2 underline hover:text-primary transition-colors duration-150"
+                >
+                  <Icon name="simple-icons:github" />
+                  <span>GitHub repo</span>
+                </a>
+              </li>
+            )
+          }
+          {
+            links.demo && (
+              <li>
+                <a
+                  href={links.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-2 underline hover:text-primary transition-colors duration-150"
+                >
+                  <Icon name="lucide:play" />
+                  <span>Demo</span>
+                </a>
+              </li>
+            )
+          }
+        </ul>
+      </SectionProse>
+    </div>
+    <SectionProse>
+      <Content />
+    </SectionProse>
+  </Section>
+</BaseLayout>

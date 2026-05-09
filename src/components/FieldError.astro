@@ -1,0 +1,9 @@
+---
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+---
+
+<span id={id} class="text-destructive h-6" aria-live="polite"></span>

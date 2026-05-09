@@ -1,0 +1,96 @@
+title: Music
+description: Listen to my music, explore my album, and read about my musical life.
+ogImage:
+  src: '@/assets/img/bradley-piano-landscape.jpg'
+  alt: ''
+bio:
+  title: Biography
+  image:
+    src: '@/assets/img/bradley-organ-above.jpg'
+    alt: Live action shot of Bradley playing the organ, taken from above
+  content: |
+    Praised for his “virtuoso piano playing” and his ability to leave audiences
+    “spellbound” (ClassicSA), as well as his “clean, clear and elegant”
+    performances (American Record Guide), Bradley Burgess is one of today’s few
+    concert artists who can move seamlessly between the piano bench and organ
+    console.
+
+    He has appeared in recital in many major venues of his home country of South
+    Africa, as well as in the UK, Finland, and across the United States, including
+    performances at Church of the Transfiguration (New York, NY), Third Baptist
+    Church (St. Louis, MO), St. Peter’s Church (Long Island, NY), Rutgers University
+    (Camden, NJ), Woolsey Hall (New Haven, CT), St. George’s Cathedral, Baxter
+    Concert Hall (Cape Town, South Africa), and King’s Chapel (Boston, MA).
+
+    Highly in demand as an accompanist, recent collaborations include Choral Evensong
+    with the choir of St. Michael's, Raleigh and the *Schola Cantorum* of the Diocese
+    of East Carolina, as well as the Raleigh Convocation Choir. As an educator he has
+    taught at several music schools and academies, and served as a chamber music coach
+    for North Carolina Chamber Music Institute in Raleigh, NC.
+
+    As a liturgical musician, he has served as Assistant Organist at Holy Name
+    of Jesus Cathedral (Raleigh, NC), Lay Associate for Music at Church of the
+    Nativity (Raleigh, NC), Director of Music & Organist at St. Mark’s Episcopal
+    Church (Islip, NY), Minister of Music at Middlebury Congregational Church
+    (Middlebury, CT), and Associate Director of Music and Worship Arts at
+    Edenton Street United Methodist Church (Raleigh, NC).
+
+    After a successful [Indigogo
+    campaign](https://www.indiegogo.com/en/projects/bradleyburgess/bradley-burgess-the-orgelbuchlein)
+    in 2024, Bradley released his first album, the complete
+    *Orgelbüchlein¨of J. S. Bach ­— recorded on the beautiful 2023 Paul Fritts
+    *Op. 43 organ at St. Thomas's Church (Terrace Park, OH), and released under
+    *the RavenCD label. The album was praised in *The American Record Guide* and
+    was featured on [*Pipedreams #2522: The Creative
+    Spirit*](https://www.pipedreams.org/episode/2025/06/02/the-creative-spirit),
+    and on [*The King of Instruments: Bach's
+    340th*](https://www.kingofinstruments.show/2025/03/16/), and is regularly
+    played on [Organroxx](https://organroxx.com). The album is available to
+    stream on all major platforms, and available to purchase from
+    [RavenCD](https://ravencd.com/merchantmanager/product_info.php?products_id=381).
+
+    Bradley holds undergraduate and graduate degrees in piano performance from
+    the Manhattan School of Music in New York City, the University of Cape Town,
+    and Yale University’s Institute of Sacred Music and School of Music, where
+    he was awarded the *Julie B. Sherman Prize* for excellence in organ playing.
+    While at Yale, he served as Organ Scholar at Marquand Chapel (Yale Divinity
+    School) and Organist for Berkeley Divinity School. He has also been the
+    recipient of First Prize at the *Fine Music Radio / Pick ‘n Pay 101.3 Music
+    Awards*, the *Oppenheimer Memorial Trust Bursary*, and a generous grant from
+    the National Arts Council of South Africa.
+album:
+  title: Album
+  image:
+    src: '@/assets/img/ob-cover.png'
+    alt: >-
+      Cover of the Orgelbüchlein album, featuring the Paul Fritts organ at St.
+      Thomas's Church, Terrace Park, OH
+  content: |
+    My debut album features the complete *Orgelbüchlein* of J. S. Bach,
+    recorded on the beautiful Paul Fritts Op. 43 organ (2023) at St. Thomas's
+    Church (Terrace Park, OH), and released under the RavenCD label. You can read
+    the [album liner notes](/blog/p/ob-liner-notes) for more information about the
+    project, music, and organ.
+
+    Available on most major streaming platforms.
+  links:
+    - label: Spotify
+      to: 'https://open.spotify.com/album/6mS3gueOkxGS8f6vsd3cOW'
+      icon: 'simple-icons:spotify'
+      variant: spotify
+    - label: Apple Music
+      to: 'https://music.apple.com/us/album/j-s-bach-orgelb%C3%BCchlein-bradley-burgess-organist/1790286587'
+      icon: 'simple-icons:applemusic'
+      variant: applemusic
+    - label: YouTube
+      to: 'https://music.youtube.com/playlist?list=OLAK5uy_ludME76CruB0LqE3bM-Y6J5pBJ_fSCriY'
+      icon: 'simple-icons:youtube'
+      variant: youtube
+    - label: Tidal
+      to: 'https://tidal.com/album/411392357'
+      icon: 'simple-icons:tidal'
+      variant: tidal
+    - label: Buy
+      to: 'https://ravencd.com/merchantmanager/product_info.php?products_id=381'
+      icon: 'lucide:disc'
+      variant: default

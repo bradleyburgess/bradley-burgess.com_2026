@@ -1,0 +1,68 @@
+---
+import { Button } from "@/components/ui/button";
+import { SectionGrid } from "@/components/ui/section";
+import {
+  Tile,
+  TileContent,
+  TileDescription,
+  TileMedia,
+  TileTitle,
+} from "@/components/ui/tile";
+import { Image } from "astro:assets";
+import Heading from "@/components/Heading.astro";
+import { Icon } from "astro-icon/components";
+import { formatDate } from "@/lib/utils";
+
+interface Props {
+  posts: {
+    category?: string;
+    href: string;
+    title?: string;
+    description?: string;
+    date: Date | string;
+    image: {
+      src: ImageMetadata;
+      alt: string;
+    };
+  }[];
+}
+
+const { posts } = Astro.props;
+---
+
+<div class="w-full flex flex-col gap-4 lg:gap-6">
+  <Heading class="text-center" level={2}>Recent Blog Posts</Heading>
+  <SectionGrid size="sm">
+    {
+      posts?.map(({ title, description, image, href, date, category }) => (
+        <Tile href={href} class="m-2 lg:m-4">
+          <TileMedia class="aspect-video">
+            <Image fit="cover" layout="constrained" {...image} />
+          </TileMedia>
+          <TileContent>
+            <TileTitle class="leading-tight">{title}</TileTitle>
+            <TileDescription class="flex flex-wrap justify-between">
+              <span class="text-xs uppercase ">{formatDate(date)}</span>
+              <span>{category}</span>
+            </TileDescription>
+            <TileDescription>{description}</TileDescription>
+          </TileContent>
+        </Tile>
+      ))
+    }
+  </SectionGrid>
+  <Button variant="ghost" as="a" href="/blog/1" class="self-end"
+    >See all <Icon name="lucide:chevron-right" /></Button
+  >
+</div>
+
+<style>
+  .separator {
+    display: inline-block;
+  }
+  .separator::before {
+    content: "•";
+    font-size: 0.75rem;
+    margin-left: 0.5em;
+  }
+</style>

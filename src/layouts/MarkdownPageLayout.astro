@@ -1,0 +1,16 @@
+---
+import { Section, SectionContent, SectionProse } from "@/components/ui/section";
+import BaseLayout from "./BaseLayout.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  <Section style={{ "--container": "672px" }}>
+    <SectionContent>
+      <SectionProse>
+        <slot />
+      </SectionProse>
+    </SectionContent>
+  </Section>
+</BaseLayout>

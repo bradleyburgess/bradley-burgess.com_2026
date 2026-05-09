@@ -1,0 +1,47 @@
+---
+import { Marquee, MarqueeContent } from "@/components/ui/marquee";
+import { Image } from "astro:assets";
+
+interface Props {
+  images: {
+    src: ImageMetadata;
+    alt: string;
+  }[];
+}
+
+const { images } = Astro.props;
+---
+
+<Marquee
+  class="fade-in dark:mask-x-from-80% mask-x-from-90% dark:lg:mask-x-from-50% lg:mask-x-from-80% max-w-full"
+>
+  <MarqueeContent pauseOnHover>
+    {
+      images?.map((item) => (
+        <Image
+          layout="constrained"
+          height={800}
+          width={800}
+          class="w-50 lg:w-xs rounded-md aspect-square object-cover"
+          src={item.src}
+          alt={item.alt}
+        />
+      ))
+    }
+  </MarqueeContent>
+</Marquee>
+
+<style>
+  .fade-in {
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>

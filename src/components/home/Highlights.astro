@@ -1,0 +1,56 @@
+---
+import {
+  Tile,
+  TileActions,
+  TileContent,
+  TileDescription,
+  TileTitle,
+} from "@/components/ui/tile";
+import type { HighlightSchema } from "@/content/schemas/highlightSchema";
+import Button from "@/components/ui/button/button.astro";
+import Icon from "node_modules/astro-icon/components/Icon.astro";
+import Heading from "../Heading.astro";
+import { marked } from "marked";
+
+interface Props {
+  highlights: HighlightSchema[];
+}
+
+const { highlights } = Astro.props;
+---
+
+<div class="w-full flex flex-col gap-4 lg:gap-6">
+  <Heading class="text-center" level={2}>Highlights</Heading>
+  <div class="flex gap-x-8 gap-y-4 flex-wrap justify-center">
+    {
+      highlights.map((highlight) => (
+        <Tile
+          variant="floating"
+          class="flex-1 max-w-md min-w-60 justify-between"
+        >
+          <TileContent>
+            <TileTitle class="flex gap-2">
+              <Icon name={highlight.icon} />
+              {highlight.title}
+            </TileTitle>
+            <TileDescription class="[&_a]:underline" set:html={marked.parse(highlight.description)} />
+          </TileContent>
+          {highlight.links && (
+            <TileActions>
+              {highlight.links.map((link, idx) => (
+                <Button
+                  as="a"
+                  href={link.to}
+                  variant={idx === 0 ? "default" : "outline"}
+                >
+                  {link.icon && <Icon name={link.icon} />}
+                  {link.label}
+                </Button>
+              ))}
+            </TileActions>
+          )}
+        </Tile>
+      ))
+    }
+  </div>
+</div>

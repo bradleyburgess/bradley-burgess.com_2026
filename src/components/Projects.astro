@@ -1,0 +1,74 @@
+---
+import { SectionGrid } from "@/components/ui/section";
+import {
+  Tile,
+  TileContent,
+  TileDescription,
+  TileMedia,
+  TileTitle,
+} from "@/components/ui/tile";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import type { TechSchema } from "@/content/schemas/techSchema";
+import { marked } from "marked";
+
+interface Props {
+  projects: {
+    href: string;
+    title?: string;
+    description?: string;
+    publishDate?: string;
+    technologies?: TechSchema[];
+    image: {
+      src: ImageMetadata;
+      alt: string;
+      width?: number;
+      height?: number;
+    };
+  }[];
+}
+
+const { projects } = Astro.props;
+---
+
+<div class="w-full flex flex-col gap-4 lg:gap-6">
+  <SectionGrid size="sm">
+    {
+      projects?.map(
+        ({ title, description, image, href, technologies }) => (
+          <Tile href={href} class="m-2 lg:m-4">
+            <TileMedia class="aspect-video">
+              <Image fit="cover" layout="full-width" {...image} />
+            </TileMedia>
+            <TileContent>
+              <TileTitle class="leading-tight">{title}</TileTitle>
+              <TileDescription class="flex flex-wrap gap-2">
+                {technologies &&
+                  technologies.map((t) => (
+                    <Icon
+                      size="16"
+                      title={t.name}
+                      name={t.icon}
+                      aria-label={t.name}
+                    />
+                  ))}
+              </TileDescription>
+              <TileDescription set:html={marked(description!)} />
+            </TileContent>
+          </Tile>
+        ),
+      )
+    }
+  </SectionGrid>
+</div>
+
+<style>
+  .separator {
+    display: inline-block;
+  }
+  .separator::before {
+    content: "•";
+    font-size: 0.75rem;
+    margin-left: 0.5em;
+  }
+</style>

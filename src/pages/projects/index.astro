@@ -1,0 +1,78 @@
+---
+import ProjectsBlock from "@/components/Projects.astro";
+import Heading from "@/components/Heading.astro";
+import {
+  Section,
+  SectionActions,
+  SectionContent,
+  SectionProse,
+  SectionSplit,
+} from "@/components/ui/section";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { marked } from "marked";
+import { Button } from "@/components/ui/button";
+import { Icon } from "astro-icon/components";
+
+const allProjects = await getCollection("projects");
+if (!allProjects) throw new Error("No projects found");
+
+const allTechs = await getCollection("technologies");
+if (!allTechs) throw new Error("No technologies found");
+
+const page = (await getCollection("projectsPage"))[0]?.data;
+if (!page) throw new Error("Projects page config not found");
+
+const projects = allProjects
+  .sort((a, b) => {
+    const dateA = new Date(a.data.publishDate);
+    const dateB = new Date(b.data.publishDate);
+    return dateB.getTime() - dateA.getTime();
+  })
+  .map((p) => ({
+    href: `/projects/${p.id}`,
+    title: p.data.title,
+    description: p.data.description,
+    publishDate: p.data.publishDate,
+    technologies: p.data.technologies
+      .map((t) => allTechs.find((tech) => tech.data.id === t))
+      .map((t) => t!.data),
+    image: {
+      src: p.data.image.src,
+      alt: p.data.image.alt,
+    },
+  }));
+---
+
+<BaseLayout title={page.title} description={page.description} ogImage={page.ogImage}>
+  <Section size="lg" style={{ "--container": "100rem" }}>
+    <SectionSplit class="@5xl:grid-cols-[3fr_5fr]">
+      <div>
+        <SectionContent sticky>
+          <Heading level={1}>{page.title}</Heading>
+          <SectionProse
+            class="text-muted-foreground"
+            set:html={marked.parse(page.content)}
+          />
+          <SectionActions>
+            {
+              page.links?.map(({ icon, label, to }, i) => (
+                <Button
+                  variant={i === 0 ? "default" : "outline"}
+                  as="a"
+                  href={to}
+                >
+                  {icon && <Icon name={icon} />}
+                  {label}
+                </Button>
+              ))
+            }
+          </SectionActions>
+        </SectionContent>
+      </div>
+      <SectionContent>
+        <ProjectsBlock projects={projects} />
+      </SectionContent>
+    </SectionSplit>
+  </Section>
+</BaseLayout>

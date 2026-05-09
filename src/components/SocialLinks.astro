@@ -1,0 +1,56 @@
+---
+import { getCollection } from "astro:content";
+import { Button } from "./ui/button";
+import { Icon } from "astro-icon/components";
+import { cn } from "@/lib/utils";
+
+interface Props {
+  size?: "md" | "sm";
+  animate?: boolean;
+}
+
+const { size = "md", animate = false } = Astro.props;
+
+const config = await getCollection("config").then(
+  (collection) => collection[0].data,
+);
+if (!config) {
+  throw new Error("Site config not found");
+}
+
+const baseContainerClasses = ["flex", "justify-center", "flex-wrap"];
+
+const mdContainerClasses = ["gap-2", "lg:gap-4"];
+const smContainerClasses = ["gap-0", "lg:gap-1"];
+
+const iconClasses = size === "md" ? "size-5 lg:size-6" : "size-4 lg:size-5";
+---
+
+{
+  config.socialLinks && (
+    <div
+      data-usal={
+        animate ? "split-item duration-300 blur fade-r delay-175 once" : ""
+      }
+      class={cn(
+        baseContainerClasses,
+        size === "md" ? mdContainerClasses : smContainerClasses,
+      )}
+    >
+      {config.socialLinks?.map((link) => (
+        <Button
+          as="a"
+          rel="noopener noreferrer"
+          variant="ghost"
+          href={link.to}
+          size={size === "md" ? "icon-lg" : "icon-sm"}
+          title={`Bradley on ${link.label}`}
+          target="_blank"
+        >
+          <Icon class={iconClasses} aria-hidden name={link.icon} />
+          <span class="sr-only">{`Bradley on ${link.label}`}</span>
+        </Button>
+      ))}
+    </div>
+  )
+}

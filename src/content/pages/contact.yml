@@ -1,0 +1,17 @@
+title: Get in touch
+description: >-
+  Drop me a line; I'd love to hear from you!
+socials:
+  - bluesky
+  - tiktok
+  - youtube
+  - github
+image:
+  src: '@/assets/img/bradley-headshot.jpg'
+  alt: A headshot of Bradley Burgess
+content: |
+  I'd love to hear from you. I'm happy to answer questions about this site, my
+  work, or chat about anything else.
+
+  The fastest way to get in touch with me is through the form below. I'm also
+  available on these:

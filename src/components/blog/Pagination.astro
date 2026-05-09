@@ -1,0 +1,49 @@
+---
+import type { Page } from "astro";
+import { Icon } from "astro-icon/components";
+import { Button } from "../ui/button";
+
+interface Props {
+  page: Page;
+}
+
+const { page } = Astro.props;
+---
+
+<div class="grid grid-cols-[1fr_auto_1fr]">
+  <div class="flex gap-2 justify-end">
+    {
+      page.url.first && (
+        <Button variant="ghost" as="a" href={page.url.first}>
+          <Icon aria-label="first page" name="lucide:chevrons-left" />
+        </Button>
+      )
+    }
+    {
+      page.url.prev && (
+        <Button variant="ghost" as="a" href={page.url.prev}>
+          <Icon aria-label="previous page" name="lucide:chevron-left" />
+        </Button>
+      )
+    }
+  </div>
+  <div class="text-muted-foreground text-sm">
+    Page {page.currentPage} of {page.lastPage}
+  </div>
+  <div class="flex gap-2 justify-start">
+    {
+      page.url.next && (
+        <Button variant="ghost" as="a" href={page.url.next}>
+          <Icon aria-label="next page" name="lucide:chevron-right" />
+        </Button>
+      )
+    }
+    {
+      page.url.last && (
+        <Button variant="ghost" as="a" href={page.url.last}>
+          <Icon aria-label="last page" name="lucide:chevrons-right" />
+        </Button>
+      )
+    }
+  </div>
+</div>
