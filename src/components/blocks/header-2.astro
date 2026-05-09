@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/collapsible";
 import { Header, HeaderActions } from "@/components/ui/header";
 import { Icon } from "@/components/ui/icon";
-import { Logo, LogoImage, LogoText } from "@/components/ui/logo";
+// import { Logo, LogoImage, LogoText } from "@/components/ui/logo";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -18,11 +18,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   SidebarMenu,
   SidebarMenuButton,
@@ -57,7 +53,12 @@ interface Props {
   }[];
 }
 
-const { logo, menus, links, socials } = Astro.props;
+const {
+  // logo,
+  menus,
+  links,
+  socials,
+} = Astro.props;
 
 const desktopMenuItemClass =
   "inline-flex h-8 items-center bg-transparent px-3 py-0 text-sm font-medium";
