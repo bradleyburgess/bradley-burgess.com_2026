@@ -36,7 +36,7 @@ const { posts } = Astro.props;
       posts?.map(({ title, description, image, href, publishDate }) => (
         <Tile href={href}>
           <TileMedia class="aspect-video w-full">
-            <Image fit="cover" layout="full-width" {...image} />
+            <Image fit="cover" {...image} width={600} quality={80} />
           </TileMedia>
           <TileContent>
             <TileTitle class="leading-tight">{title}</TileTitle>
