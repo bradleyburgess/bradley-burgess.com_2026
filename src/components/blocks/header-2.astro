@@ -64,7 +64,8 @@ const desktopMenuItemClass =
   "inline-flex h-8 items-center bg-transparent px-3 py-0 text-sm font-medium";
 
 function isActiveLink(href: string) {
-  const currentPath = Astro.url.pathname;
+  const currentPath = Astro.url.pathname.replace(/\/+$/, "").replace(/^\//, "");
+  href = href.replace(/\/+$/, "").replace(/^\//, "");
   const isActive = currentPath.toLowerCase() === href.toLowerCase();
   return isActive;
 }
@@ -75,7 +76,7 @@ function isActiveLink(href: string) {
     <LogoImage src={logo?.src} alt={logo?.alt} />
     <LogoText>{logo?.text}</LogoText>
   </Logo> -->
-  <div />
+  <div></div>
   <NavigationMenu class="absolute left-1/2 -translate-x-1/2 @max-5xl:hidden">
     <NavigationMenuList>
       {
