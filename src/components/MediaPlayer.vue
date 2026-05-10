@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import CheckboxVue from "@/components/ui/checkbox/checkbox.vue";
 import audioBg from "@/assets/img/bradley-avatar.png";
+import { LoaderCircle } from "lucide-vue-next";
 import { computed, onMounted, ref, watch } from "vue";
-import * as Plyr from "plyr";
-import "plyr/dist/plyr.css";
+import type * as PlyrType from "plyr";
 import type { TrackSchema } from "@/content/schemas";
 
 type TrackWithId = TrackSchema & { id: number };
@@ -11,18 +11,39 @@ type TrackWithId = TrackSchema & { id: number };
 const props = defineProps<{
   playlist: TrackWithId[];
 }>();
+const containerElement = ref<HTMLElement | null>(null);
 const playerElement = ref<HTMLElement | null>(null);
-const playerInstance = ref<Plyr | null>(null);
+const playerInstance = ref<PlyrType.default | null>(null);
+const isReady = ref(false);
 const currentTrackId = ref(0);
 const videoSelected = ref(true);
 const audioSelected = ref(true);
 
 onMounted(() => {
-  if (playerElement.value) {
-    playerInstance.value = new Plyr.default(playerElement.value, {
-      controls: ["play", "progress", "current-time", "mute"],
-    });
-  }
+  if (!containerElement.value) return;
+  const observer = new IntersectionObserver(
+    async ([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      const [PlyrModule] = await Promise.all([
+        import("plyr"),
+        import("plyr/dist/plyr.css"),
+      ]);
+      if (!playerElement.value) return;
+      playerInstance.value = new PlyrModule.default(playerElement.value, {
+        controls: ["play", "progress", "current-time", "mute"],
+      });
+      playerInstance.value.once("ready", () => {
+        isReady.value = true;
+      });
+      // Fallback: if ready already fired or never fires (e.g. audio tracks), resolve anyway
+      setTimeout(() => {
+        isReady.value = true;
+      }, 3000);
+    },
+    { rootMargin: "200px" },
+  );
+  observer.observe(containerElement.value);
 });
 
 const tracks = computed<TrackWithId[]>(() => {
@@ -58,6 +79,7 @@ const playTrack = (trackId: number) => {
 
 <template>
   <div
+    ref="containerElement"
     class="grid md:grid-cols-2 lg:grid-cols-[5fr_3fr] gap-8 lg:gap-16 items-start"
   >
     <div
@@ -65,13 +87,11 @@ const playTrack = (trackId: number) => {
         backgroundImage: 'url(/assets/img/soundwave.png)',
         backgroundSize: 'cover',
       }"
-      :class="{
-        'w-full rounded-xl sticky top-16 md:top-24 lg:top-52 aspect-video grid items-center bg-neutral-900 z-10': true,
-        // 'top-60':
-        //   props.playlists[currentListIndex].tracks[currentTrackIndex].type ===
-        //   'audio',
-      }"
+      class="w-full rounded-xl sticky top-16 md:top-24 lg:top-52 aspect-video grid items-center bg-neutral-900 z-10"
     >
+      <div v-if="!isReady" class="absolute inset-0 flex flex-col gap-4 items-center justify-center">
+        <LoaderCircle class="size-16 animate-spin" />
+      </div>
       <div
         ref="playerElement"
         id="player"
@@ -122,7 +142,7 @@ const playTrack = (trackId: number) => {
   </div>
 </template>
 
-<!-- <style scoped>
+<style scoped>
 :deep(.plyr) {
   /* Accent / highlight color */
   --plyr-color-main: #3b82f6;
@@ -180,4 +200,4 @@ const playTrack = (trackId: number) => {
   /* Progress marker */
   --plyr-progress-marker-background: #f4f4f5;
 }
-</style> -->
+</style>
