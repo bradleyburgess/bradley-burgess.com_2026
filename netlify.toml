@@ -23,7 +23,7 @@
       media-src 'self' blob: https://dl.dropboxusercontent.com;
       frame-src https://www.google.com https://www.youtube.com https://www.youtube-nocookie.com;
       connect-src 'self' https://lichess.org https://api.telegram.org;
-      font-src 'self';
+      font-src 'self' data:;
       object-src 'none';
       base-uri 'self';
       form-action 'self';
