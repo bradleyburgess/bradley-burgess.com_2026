@@ -54,6 +54,7 @@ const { Content } = await render(post);
             <AvatarImage
               src={bradleyAvatar}
               alt="Headshot of Bradley Burgess"
+              loading="eager"
             />
           </Avatar>
         </ItemMedia>
@@ -107,7 +108,7 @@ const { Content } = await render(post);
       </Item>
     </SectionContent>
     <SectionMedia>
-      <Image {...image} />
+      <Image {...image} loading="eager" width={1200} />
     </SectionMedia>
     <SectionProse>
       <Content />

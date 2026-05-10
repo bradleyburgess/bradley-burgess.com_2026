@@ -8,4 +8,4 @@ export { imageMetadataSchema } from "./imageSchema";
 export { linkSchema } from "./linkSchema";
 export { pageSchema } from "./pageSchema";
 export { projectSchema } from "./projectSchema";
-export { trackSchema } from "./trackSchema";
+export { trackSchema, type TrackSchema } from "./trackSchema";

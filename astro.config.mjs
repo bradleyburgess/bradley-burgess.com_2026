@@ -30,11 +30,12 @@ if (NODE_ENV === "production" && !BASE_URL)
 
 // https://astro.build/config
 export default defineConfig({
-  site: BASE_URL ?? 'http://localhost:4321',
+  site: BASE_URL ?? "http://localhost:4321",
   output: "static",
   adapter: SSR_ADAPTER === "netlify" ? netlify() : node({ mode: "standalone" }),
   image: {
     domains: ["images.unsplash.com"],
+    layout: "constrained",
   },
   integrations: [icon(), preact(), vue(), sitemap()],
   vite: {

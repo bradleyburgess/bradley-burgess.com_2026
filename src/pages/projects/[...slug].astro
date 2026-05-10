@@ -63,6 +63,7 @@ const { Content } = await render(project);
             <AvatarImage
               src={bradleyAvatar}
               alt="Headshot of Bradley Burgess"
+              loading="eager"
             />
           </Avatar>
         </ItemMedia>
@@ -73,7 +74,7 @@ const { Content } = await render(project);
       </Item>
     </SectionContent>
     <SectionMedia>
-      <Image {...image} />
+      <Image {...image} loading="eager" width={1200} />
     </SectionMedia>
     <div class="grid md:grid-cols-2 md:gap-6 **:text-muted-foreground!">
       <SectionProse>

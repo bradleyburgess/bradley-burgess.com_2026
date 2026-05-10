@@ -43,10 +43,10 @@ highlights:
       and the pipe organ.
     icon: lucide:music
     links:
-      - to: /music
+      - to: /music/#tracks
         label: Listen & watch
         icon: lucide:circle-play
-      - to: /music#bio
+      - to: /music/#bio
         label: Read Bio
         icon: lucide:file-text
   - title: I'm a software developer
@@ -59,7 +59,7 @@ highlights:
       - to: /projects
         label: Projects
         icon: lucide:folder-open
-      - to: /blog
+      - to: /blog/1
         label: Blog
         icon: lucide:book-open
   - title: I love chess

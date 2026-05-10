@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/tile";
 import { marked } from "marked";
 import { formatDate } from "@/lib/utils";
+import { SectionGrid } from "../ui/section";
 
 interface Props {
   posts: {
@@ -29,11 +30,11 @@ const { posts } = Astro.props;
 ---
 
 <div class="w-full flex flex-col gap-4 lg:gap-6">
-  <!-- <SectionGrid size="sm"> -->
-  <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-start">
+  <SectionGrid size="sm">
+    <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6 xl:gap-8"> -->
     {
       posts?.map(({ title, description, image, href, publishDate }) => (
-        <Tile href={href} class="m-2 lg:m-4 md:max-w-56 flex-1">
+        <Tile href={href}>
           <TileMedia class="aspect-video w-full">
             <Image fit="cover" layout="full-width" {...image} />
           </TileMedia>
@@ -45,6 +46,6 @@ const { posts } = Astro.props;
         </Tile>
       ))
     }
-  </div>
-  <!-- </SectionGrid> -->
+    <!-- </div> -->
+  </SectionGrid>
 </div>

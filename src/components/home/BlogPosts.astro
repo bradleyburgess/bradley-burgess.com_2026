@@ -43,7 +43,7 @@ const { posts } = Astro.props;
             <TileTitle class="leading-tight">{title}</TileTitle>
             <TileDescription class="flex flex-wrap justify-between">
               <span class="text-xs uppercase ">{formatDate(date)}</span>
-              <span>{category}</span>
+              <span class="uppercase text-sm">{category}</span>
             </TileDescription>
             <TileDescription>{description}</TileDescription>
           </TileContent>

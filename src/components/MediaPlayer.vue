@@ -122,7 +122,7 @@ const playTrack = (trackId: number) => {
   </div>
 </template>
 
-<style scoped>
+<!-- <style scoped>
 :deep(.plyr) {
   /* Accent / highlight color */
   --plyr-color-main: #3b82f6;
@@ -180,4 +180,4 @@ const playTrack = (trackId: number) => {
   /* Progress marker */
   --plyr-progress-marker-background: #f4f4f5;
 }
-</style>
+</style> -->
