@@ -7,9 +7,10 @@ interface Props {
     src: ImageMetadata;
     alt: string;
   }[];
+  priority?: boolean;
 }
 
-const { images } = Astro.props;
+const { images, priority } = Astro.props;
 ---
 
 <Marquee
@@ -17,7 +18,7 @@ const { images } = Astro.props;
 >
   <MarqueeContent pauseOnHover>
     {
-      images?.map((item) => (
+      images?.map((item, idx) => (
         <Image
           layout="constrained"
           height={800}
@@ -25,6 +26,7 @@ const { images } = Astro.props;
           class="w-50 lg:w-xs rounded-md aspect-square object-cover"
           src={item.src}
           alt={item.alt}
+          priority={priority && idx < 3 ? true : false}
         />
       ))
     }
