@@ -164,3 +164,7 @@ h5,
 h6 {
   @apply font-heading;
 }
+
+section.footnotes {
+  @apply text-sm;
+}

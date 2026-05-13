@@ -8,6 +8,12 @@ const config = await getCollection("config").then(
 if (!config) {
   throw new Error("Site config not found");
 }
+
+const footerPageLinks = [
+  { href: "/privacy-policy", label: "Privacy" },
+  { href: "/use-of-ai", label: "AI Use" },
+  { href: "/rss.xml", label: "RSS" },
+];
 ---
 
 <footer class="mt-16 mb-4 lg:mb-6">
@@ -19,10 +25,19 @@ if (!config) {
         Copyright &copy; {new Date().getFullYear()}. Bradley Burgess.
       </p>
     </div>
-    <div class="flex gap-2 text-sm text-muted-foreground lg:text-md uppercase [&_a]:underline [&_a]:hover:text-primary">
-      <a href="/rss.xml">RSS</a>
-      <span>•</span>
-      <a href="/privacy-policy">Privacy</a>
+    <div
+      class="flex gap-2 text-sm text-muted-foreground lg:text-md uppercase [&_a]:underline [&_a]:hover:text-primary"
+    >
+      {
+        footerPageLinks.map((link, index) => (
+          <>
+            <a href={link.href}>{link.label}</a>
+            {index < footerPageLinks.length - 1 && (
+              <span aria-hidden>&middot;</span>
+            )}
+          </>
+        ))
+      }
     </div>
     <div>
       <SocialLinks size="sm" />

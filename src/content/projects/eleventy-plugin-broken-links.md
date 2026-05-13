@@ -28,16 +28,16 @@ broken internal and external links
 
 ## Project story
 
-My current personal sites both use [Astro](https://astro.build), however I am
-also a big fan of 11ty, and a previous iteration of my music site was built with
-it.
+My current personal site uses [Astro](https://astro.build), however I have used
+11ty quire a bit in the past and am a big fan. A previous iteration of my
+personal site was built with it.
 
 I was linking to a fair few external sites in some places, and I searched for a
 plugin that would detect broken links. (There is little on this earth more
 _annoying_ than broken links, am I right?)
 
-I couldn't find such a plugin, so I built one! It has been used in sites built by
-other people, one of whom has actually contributed to the project.
+I couldn't find an existing plugin, so I built one! It has been used in sites
+built by other developers, one of whom has actually contributed to the project.
 
 You can read more about this project, including installation and usage, in the
 project [README](https://github.com/bradleyburgess/eleventy-plugin-broken-links#eleventy-plugin-broken-links).

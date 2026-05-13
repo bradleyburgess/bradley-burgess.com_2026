@@ -13,15 +13,15 @@ image:
 ---
 
 I've been working on the NeetCode Blind75 problems, and I decided from the
-beginning that I wanted to do everything locally. I'll submit the problem on
-NeetCode, but I want to have my own tests on my own local machine. (You can view
-my work at the [GitHub
+beginning that I wanted to solve the problems locally instead of in the browser
+editor. I'll submit the problem on NeetCode, but I want to have my own tests on
+my own local machine. (You can view my work at the [GitHub
 repo](https://github.com/bradleyburgess/neetcode-blind75/)).
 
-I am doing the problems in Python and I'm using `pytest` for testing. I started
-out with a great directory structure with each problem having its own directory.
-I originally had it set up so that each problem used its own unique filename and
-test filename, e.g.:
+I am currently doing the problems in Python and I'm using `pytest` for testing.
+I started out with a great directory structure with each problem having its own
+directory. I originally had it set up so that each problem used its own unique
+filename and test filename, e.g.:
 
 ```text
 neetcode-blind75/
@@ -112,13 +112,13 @@ Yikes.
 
 ## It's quite a simple fix actually
 
-ChatGPT was not very helpful in diagnosing this problem. It told me to change
+LLMs were not very helpful in diagnosing this problem. They told me to change
 `PYTHONPATH` and to run the tests with `python3 -m pytest src`. None of that
 worked.
 
-It was only when I Googled the actual error I was getting 
-(`ImportError: attempted relative import with no known parent package`)
-and read the Pytest documentation that I discovered the **import mechanisms** of Pytest.
+It was only when I Googled the actual error I was getting (`ImportError:
+attempted relative import with no known parent package`) and read the Pytest
+documentation that I discovered the **import mechanisms** of Pytest.
 
 By default, Pytest uses the `prepend` import mode, which modifies `sys.path` to
 allow importing test modules directly as **scripts**. What you really want is to
@@ -147,4 +147,4 @@ Pytest:
 - [x] `--import-mode=importlib` in your `pyproject.toml` or on the `pytest`
   command
 
-Done. (And the tests pass.)
+Done. (And the tests pass!)

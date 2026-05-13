@@ -1,7 +1,9 @@
 ---
-title: "NeetCode Blind75: Intro & #1 — Contains Duplicate"
-description: "Kicking off my Blind75 journey with a look at the first problem — and three different ways to solve it."
-publishDate: "2025-04-09"
+title: 'NeetCode Blind75: Intro and #1'
+description: >-
+    Getting started on my Blind75 journey with a look at the first problem — and 
+    three different ways to solve it.
+publishDate: '2025-04-09'
 isFeatured: true
 category: dev
 tags:
@@ -16,22 +18,30 @@ image:
 I’ve decided that it's time to get serious about *Data Structures and
 Algorithms*, which is why I've started to tackle the [NeetCode
 Blind75](https://neetcode.io/practice). It’s a curated list of 75 essential
-coding interview problems, broken down by topic, and widely regarded as one of
-the best ways to prepare for real-world interviews or just level up your
-algorithmic thinking.
+coding problems, widely regarded as one of the best ways to prepare for
+real-world interviews or just level up your algorithmic thinking.
 
 I will be doing the problems initially in Python, although I might go back and
-do them again in another language and/or paradigm. C would be fun at a later
-stage, especially if I wanted to kick things up a gear!
+do them again in another language and/or paradigm. Java might be fun, or C++ —
+Java because it's considered by many to be the best language for learning
+(taught in many CS programs), and C++ because you have to take care of so much
+more, like memory mangement etc. (C is probably a little extreme for this.)
 
 ## Methodology
 
-I didn't want to do the problems on Neet- or Leetcode. I wanted the code on my
-own machine with my own tests.
+I don't want to do the problems on Neet- or Leetcode. I want the code on my own
+machine with my own tests. There are a number of reasons for this, but primary
+among them is that I want to own the code and have it in my own repo. I also
+hate writing code in the browser; it's nice to use your own tools. If I later
+decide to do more serious interview prep, I can take off the “training wheels”
+of and IDE.
 
-The way I'm going to do this is to check out the Neetcode problem, and then have
-ChatGPT write some tests for me, which I'll expand. Then, I can solve the
-problem in as many different ways as I want.
+The way I'm going to do this is to check out the Neetcode problem, and then
+generate some tests with an LLM (one of the best uses of AI), which I'll expand.
+Then, I can solve the problem in as many different ways as I want, and have all
+the solutions co-exist in the repo.
+
+---
 
 ## Intro to Problem #1: Contains Duplicates
 
@@ -45,9 +55,7 @@ solve it, each with different tradeoffs. I wanted to explore that explicitly, so
 I wrote three different approaches: a brute-force solution, a hash map-based
 solution, and a sort-based solution.
 
----
-
-### Brute-force solution
+### Naive / Brute-force solution
 
 ```python
 def brute_force(arr: list[int]) -> bool:
@@ -64,8 +72,9 @@ def brute_force(arr: list[int]) -> bool:
     return result
 ```
 
-This checks every pair. Because there are two nested loops, it's **O(n²)** in
-time complexity — inefficient but good for establishing baseline logic. 
+This checks every pair, which is obviously not ideal solution. Because there are
+two nested loops, it's **O(n²)** in time complexity — inefficient but good for
+establishing baseline logic. 
 
 ### Hash map solution
 
@@ -94,13 +103,21 @@ def sort_pairs(arr: list[int]) -> bool:
     return False
 ```
 
-Sorting takes **O(n log n)**, but once sorted, it’s fast and clean to compare adjacent elements.
+Sorting takes **O(n log n)**, but once sorted, it’s fast and clean to compare
+adjacent elements.
 
----
-
-## Final Thoughts
+## Takeaways / Final Thoughts
 
 I’m aiming to document each of the Blind75 problems as I go — not just the
 solutions, but also my reasoning and takeaways. This is as much about
 reinforcing my own understanding as it is about building a public record of
 progress.
+
+---
+
+**EDIT (May 13, 2026):** I have come back to this project after a long hiatus.
+In addition to what I stated above as my goals, I am realizing more and more, in
+the growing age of AI, that we are at risk of 
+[cognitive decline](https://larsfaye.com/articles/agentic-coding-is-a-trap). 
+I am coming back to this as a way to stay sharp, fill in holes that I might have
+had as a self-taught developer, and also find some fun again in programming.
