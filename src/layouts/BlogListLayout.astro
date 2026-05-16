@@ -25,6 +25,7 @@ interface Props {
   activeCategory?: string;
   title: string;
   description: string;
+  showShowAll?: boolean;
 }
 
 const {
@@ -35,6 +36,7 @@ const {
   description,
   activeTag,
   activeCategory,
+  showShowAll = false,
 } = Astro.props;
 ---
 
@@ -52,21 +54,33 @@ const {
           <CategoriesList
             categories={categories}
             activeCategory={activeCategory}
+            showShowAll={showShowAll}
           />
           <TagsList tags={tags} activeTag={activeTag} />
         </SectionContent>
       </div>
       <SectionContent>
-        <BlogPosts
-          posts={page.data.map(({ data, id }) => ({
-            href: `/blog/p/${id}`,
-            title: data.title,
-            description: data.description,
-            publishDate: data.publishDate,
-            image: data.image,
-          }))}
-        />
-        <Pagination page={page} />
+        {
+          page.data.length > 0 ? (
+            <>
+              <BlogPosts
+                posts={page.data.map(({ data, id }) => ({
+                  href: `/blog/p/${id}`,
+                  title: data.title,
+                  description: data.description,
+                  publishDate: data.publishDate,
+                  image: data.image,
+                  category: data.category,
+                }))}
+              />
+              <Pagination page={page} />
+            </>
+          ) : (
+            <div class="grid place-items-center my-auto py-8">
+              <p class="text-muted-foreground">No posts to show.</p>
+            </div>
+          )
+        }
       </SectionContent>
     </SectionSplit>
   </Section>

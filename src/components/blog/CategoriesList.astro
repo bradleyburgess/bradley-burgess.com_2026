@@ -10,13 +10,23 @@ interface Props {
     icon: string;
   }[];
   activeCategory?: string;
+  showShowAll?: boolean;
 }
 
-const { categories, activeCategory } = Astro.props;
+const { categories, activeCategory, showShowAll } = Astro.props;
 ---
 
 <>
-  <Heading level={2}>Categories</Heading>
+  <div class="flex justify-between items-center gap-2">
+    <Heading level={2}>Categories</Heading>
+    {
+      showShowAll && (
+        <a href="/blog/1" class="flex items-center gap-0 text-xs text-primary uppercase font-heading hover:underline">
+          <Icon name="lucide:chevron-left" class="size-4" /> <span>Show All</span>
+        </a>
+      )
+    }
+  </div>
   <ul class="flex flex-wrap gap-4 justify-stretch list-none">
     {
       categories?.map((cat) => (

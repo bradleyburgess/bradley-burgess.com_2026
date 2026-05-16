@@ -47,7 +47,7 @@ if (!lichess) throw new Error("Lichess social not found");
   description={page.description}
   ogImage={page.ogImage}
 >
-  <Section>
+  <Section id="my-story">
     <SectionSplit>
       <SectionContent>
         <SectionProse set:html={marked(page.content)} size="sm" />
@@ -67,8 +67,8 @@ if (!lichess) throw new Error("Lichess social not found");
 
   <Section>
     <SectionSplit>
-      <SectionContent>
-        <Card className="bg-inherit">
+      <SectionContent id="faq">
+        <Card class="bg-inherit">
           <CardHeader>
             <CardTitle>
               <Heading level={2}>{page.faq.title}</Heading>
@@ -110,8 +110,8 @@ if (!lichess) throw new Error("Lichess social not found");
         <SectionContent />
       </SectionContent>
 
-      <SectionContent>
-        <Card className="bg-inherit">
+      <SectionContent id="chess">
+        <Card class="bg-inherit">
           <CardHeader>
             <CardTitle>
               <Heading level={2}>

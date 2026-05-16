@@ -17,6 +17,7 @@ interface Props {
     title: string;
     description: string;
     publishDate: string;
+    category?: string;
     image: {
       src: ImageMetadata;
       alt: string;
@@ -30,22 +31,23 @@ const { posts } = Astro.props;
 ---
 
 <div class="w-full flex flex-col gap-4 lg:gap-6">
-  <SectionGrid size="sm">
-    <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6 xl:gap-8"> -->
+  <SectionGrid size="md">
     {
-      posts?.map(({ title, description, image, href, publishDate }) => (
+      posts?.map(({ title, description, image, href, publishDate, category }) => (
         <Tile href={href}>
           <TileMedia class="aspect-video w-full">
             <Image fit="cover" {...image} width={600} quality={80} />
           </TileMedia>
           <TileContent>
+            <TileDescription class="flex flex-wrap justify-between text-xs">
+              <span>{formatDate(publishDate)}</span>
+              <span class="uppercase font-heading">{category}</span>
+            </TileDescription>
             <TileTitle class="leading-tight">{title}</TileTitle>
-            <TileDescription>{formatDate(publishDate)}</TileDescription>
             <TileDescription set:html={marked(description!)} />
           </TileContent>
         </Tile>
       ))
     }
-    <!-- </div> -->
   </SectionGrid>
 </div>

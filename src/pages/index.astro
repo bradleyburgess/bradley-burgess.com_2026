@@ -20,7 +20,7 @@ const blogs = (await getCollection("blog"))
     category: post.data.category,
   }))
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  .slice(0, 4);
+  .slice(0, 5);
 ---
 
 <BaseLayout

@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import SocialLinks from "./SocialLinks.astro";
+import { Button } from "./ui/button";
+import { Icon } from "astro-icon/components";
 
 const config = await getCollection("config").then(
   (collection) => collection[0].data,
@@ -10,37 +12,45 @@ if (!config) {
 }
 
 const footerPageLinks = [
-  { href: "/privacy-policy", label: "Privacy" },
-  { href: "/use-of-ai", label: "AI Use" },
-  { href: "/rss.xml", label: "RSS" },
+  {
+    href: "/privacy-policy",
+    label: "Privacy",
+    icon: "lucide:shield",
+  },
+  { href: "/use-of-ai", label: "Use of AI", icon: "lucide:bot" },
+  { href: "/rss.xml", label: "RSS", icon: "lucide:rss" },
 ];
 ---
 
-<footer class="mt-16 mb-4 lg:mb-6">
+<footer class="mt-16 mb-4 lg:mb-4">
   <div
-    class="container flex flex-col lg:flex-row gap-1 items-center lg:justify-between lg:items-end"
+    class="container flex flex-col lg:flex-row gap-1 items-center lg:justify-between"
   >
     <div>
-      <p class="text-sm lg:text-md text-muted-foreground uppercase">
+      <p
+        class="text-sm font-heading lg:text-md text-muted-foreground uppercase"
+      >
         Copyright &copy; {new Date().getFullYear()}. Bradley Burgess.
       </p>
     </div>
-    <div
-      class="flex gap-2 text-sm text-muted-foreground lg:text-md uppercase [&_a]:underline [&_a]:hover:text-primary"
-    >
+    <div class="flex gap-1 justify-center lg:gap-2 flex-wrap">
       {
         footerPageLinks.map((link, index) => (
-          <>
-            <a href={link.href}>{link.label}</a>
-            {index < footerPageLinks.length - 1 && (
-              <span aria-hidden>&middot;</span>
-            )}
-          </>
+          <Button
+            variant="ghost"
+            size="sm"
+            as="a"
+            href={link.href}
+            class="text-muted-foreground"
+          >
+            <Icon name={link.icon} />
+            <span>{link.label}</span>
+          </Button>
         ))
       }
     </div>
     <div>
-      <SocialLinks size="sm" />
+      <SocialLinks size="sm" muted />
     </div>
   </div>
 </footer>
