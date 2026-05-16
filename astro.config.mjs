@@ -4,7 +4,6 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import yaml from "@rollup/plugin-yaml";
 import icon from "astro-icon";
-import preact from "@astrojs/preact";
 import netlify from "@astrojs/netlify";
 import node from "@astrojs/node";
 
@@ -37,7 +36,7 @@ export default defineConfig({
     domains: ["images.unsplash.com"],
     layout: "constrained",
   },
-  integrations: [icon(), preact(), vue(), sitemap()],
+  integrations: [icon(), vue(), sitemap()],
   vite: {
     plugins: [yaml(), tailwindcss()],
   },
