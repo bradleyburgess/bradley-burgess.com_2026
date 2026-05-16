@@ -44,11 +44,14 @@ highlights:
     icon: lucide:music
     links:
       - to: /music/#tracks
-        label: Listen & watch
+        label: Tracks
         icon: lucide:circle-play
       - to: /music/#bio
-        label: Read Bio
+        label: Bio
         icon: lucide:file-text
+      - to: /music/#album
+        label: Album
+        icon: lucide:disc
   - title: I'm a software developer
     description: |
       I have always had a passion for tinkering with tech, and I've turned that passion

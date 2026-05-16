@@ -26,7 +26,7 @@ This post is a recap of what I learned building *tsk* from scratch, including
 the C# language, the .NET framework, the patterns, the tooling, and the
 workflows.
 
-## Initial Learning of C#
+## Initial Learning of C #
 
 Before *tsk*, I had never written a single line of code in C#. Coming from a
 primarily Python and Type- and JavaScript background, I found C# to be both
@@ -48,8 +48,8 @@ powerful and expressive. Here are some takeaways:
   I thought I'd be fighting an uphill battle developing in C# on Linux. But I
   quickly found that this is absolutely not the case in 2025. The `dotnet` SDK
   CLI is really powerful, and while VS Code doesn't have all the Visual Studio
-  bells and whistles, with the 
-  [C# Dev Kit extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit), 
+  bells and whistles, with the
+  [C# Dev Kit extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit),
   you can be extremely productive.
 
 ## Object-Oriented Programming in Practice
@@ -122,7 +122,6 @@ transferrable to other projects, different teams, etc. It is of course a little
 much to use this workflow as a solo dev, but even then there are definite
 benefits.
 
-
 ## Automated GitHub Releases
 
 A really satisfying part of this project's setup was shipping *tsk* in an
@@ -153,7 +152,7 @@ I probably won't expand this project much, but future ideas include:
 - Export options (JSON, CSV)
 - Possibly a GUI wrapper or TUI mode
 - Other niceties, like overdue tasks highlighting
-- Different backend and client implementations, e.g.  database-backed storage 
+- Different backend and client implementations, e.g.  database-backed storage
   or an API
 
 ---

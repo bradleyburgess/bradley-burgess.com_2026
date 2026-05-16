@@ -1,5 +1,5 @@
 ---
-title: 'Blind75 #2 — Valid Anagram'
+title: 'Blind75 #2: Valid Anagram'
 description: >-
     Three different approaches to checking if two strings are anagrams: two 
     hash-based and one sorted.

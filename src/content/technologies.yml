@@ -25,3 +25,9 @@
 - id: dotnet
   name: .NET
   icon: "simple-icons:dotnet"
+- id: python
+  name: Python
+  icon: "simple-icons:python"
+- id: java
+  name: Java
+  icon: "devicon-plain:java"

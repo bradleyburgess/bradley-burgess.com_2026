@@ -111,6 +111,13 @@ const { Content } = await render(post);
       <Image {...image} priority width={1200} />
     </SectionMedia>
     <SectionProse>
+      <p
+        class="text-sm text-center text-muted-foreground! italic bg-neutral-900 px-8 py-8"
+      >
+        None of my content is AI-generated. Learn more about
+        <a href="/use-of-ai">my use of AI</a>.
+      </p>
+      <hr class="my-12" />
       <Content />
     </SectionProse>
   </Section>

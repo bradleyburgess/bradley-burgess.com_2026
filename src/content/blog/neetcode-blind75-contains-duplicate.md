@@ -74,7 +74,7 @@ def brute_force(arr: list[int]) -> bool:
 
 This checks every pair, which is obviously not ideal solution. Because there are
 two nested loops, it's **O(n²)** in time complexity — inefficient but good for
-establishing baseline logic. 
+establishing baseline logic.
 
 ### Hash map solution
 
@@ -117,7 +117,7 @@ progress.
 
 **EDIT (May 13, 2026):** I have come back to this project after a long hiatus.
 In addition to what I stated above as my goals, I am realizing more and more, in
-the growing age of AI, that we are at risk of 
-[cognitive decline](https://larsfaye.com/articles/agentic-coding-is-a-trap). 
+the growing age of AI, that we are at risk of
+[cognitive decline](https://larsfaye.com/articles/agentic-coding-is-a-trap).
 I am coming back to this as a way to stay sharp, fill in holes that I might have
 had as a self-taught developer, and also find some fun again in programming.

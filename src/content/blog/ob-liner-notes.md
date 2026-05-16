@@ -72,17 +72,17 @@ In recording the complete collection, three decisions were made in relation to
 the score:
 
 1. I did not record the less-than-two-measure frag­ment of O Traurigkeit.
-2. While the Neue Bach-Ausgabe includes a repeat at the end of Puer natus in 
-   Bethlehem, I chose to omit the repeat. Because of the cramped nature of the 
-   surviving manuscript, it is not clear how Bach intended this chorale to end, 
-   and no other work in the collection includes a wholesale repeat of the entire 
+2. While the Neue Bach-Ausgabe includes a repeat at the end of Puer natus in
+   Bethlehem, I chose to omit the repeat. Because of the cramped nature of the
+   surviving manuscript, it is not clear how Bach intended this chorale to end,
+   and no other work in the collection includes a wholesale repeat of the entire
    chorale.
-3. Instead of choosing a single version of Liebster Jesu (BWV 633 & 634), a path 
-   taken by many who have recorded the complete collection, I opted to create a 
-   hybrid version, using BWV 633 for the first statement of each line of the tune, 
-   and BWV 634 as a varied repeat. This is made clear in the two contrasting registrations 
-   used. The decision was motivated by a desire to hear both (albeit very similar) 
-   versions of the chorale, while not including two separate tracks of essentially 
+3. Instead of choosing a single version of Liebster Jesu (BWV 633 & 634), a path
+   taken by many who have recorded the complete collection, I opted to create a
+   hybrid version, using BWV 633 for the first statement of each line of the tune,
+   and BWV 634 as a varied repeat. This is made clear in the two contrasting registrations
+   used. The decision was motivated by a desire to hear both (albeit very similar)
+   versions of the chorale, while not including two separate tracks of essentially
    the same piece.
 
 I played my first Orgelbüchlein chorale in 2012, and over the next decade I
@@ -129,7 +129,7 @@ of my energy over the course of the past two years.
 ## About The Organ
 
 Fritts Op. 43 of 43 ranks was installed at St. Thomas Episcopal Church, Terrace
-Park, Ohio, in the early fall of 2023, replacing the 28-rank Wicks Op. 4573 of 1969. 
+Park, Ohio, in the early fall of 2023, replacing the 28-rank Wicks Op. 4573 of 1969.
 Paul Fritts & Co. was chosen by the organ committee to construct the new
 instrument, owing to the committee’s recognition of the meticulous detail and
 supreme excellence of Fritts’ work, as well as the desire to secure an
